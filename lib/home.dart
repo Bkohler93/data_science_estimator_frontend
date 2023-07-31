@@ -27,14 +27,16 @@ class HomePage extends HookConsumerWidget {
           ],
         ),
       ),
-      body: Center(
-        child: SizedBox(
-          width: 100.w > 500 ? 500 : 100.w,
-          child: predictionState == null
-              ? const EstimationTool()
-              : ResultsViewer(
-                  predictedSalary: predictionState.predictedSalary,
-                ),
+      body: SingleChildScrollView(
+        child: Center(
+          child: SizedBox(
+            width: 100.w > 500 ? 500 : 100.w,
+            child: predictionState == null
+                ? const EstimationTool()
+                : ResultsViewer(
+                    predictedSalary: predictionState.predictedSalary,
+                  ),
+          ),
         ),
       ),
     );

@@ -42,10 +42,9 @@ class ApiRepository {
     final request =
         Uri.encodeFull("$baseUrl/avg_salary_data?field=$formattedFieldName&job_title=$jobTitle");
     final response = await _ref.read(dioProvider).get(request);
-    final rows = jsonDecode(response.data);
-    for (var row in rows) {
+    for (var row in response.data) {
       categories.add(row[formattedFieldName]);
-      salaries.add(row["salary"]);
+      salaries.add(double.parse(row["salary"]));
     }
 
     return AvgSalaryBarChartData(fieldName, categories, salaries, jobTitle);
@@ -74,7 +73,6 @@ class ApiRepository {
   Future<AttributeNames> getAttributeNames() async {
     final request = Uri.encodeFull("$baseUrl/attribute_names");
     final response = await _ref.read(dioProvider).get(request);
-    var attributeData = jsonDecode(response.data);
-    return AttributeNames.fromMap(attributeData);
+    return AttributeNames.fromMap(response.data);
   }
 }
